@@ -24,10 +24,10 @@ Results reported in the console; plot generated in the viewer
 Runs a non-parametric permutation test of a correlation.
 }
 \details{
-\code{permutation_cor()} will:
+\code{permutation_cor} will:
 \itemize{
   \item Run a permutation test for a correlation and report a (two-sided) p-value
-  \item Report a symmetry test for the null distribution generated from permuted data (\code{symmetry.test()} called from \code{lawstat})
+  \item Report a symmetry test for the null distribution generated from permuted data (\code{symmetry.test} called from \code{lawstat})
   \item Produce a histogram of the generated null distribution and overlay the observed correlation on it (using \code{ggplot2})
 }
 Requires: \code{ggplot2} and \code{lawstat}
