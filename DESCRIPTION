@@ -1,0 +1,13 @@
+Package: permutation
+Title: Permutation Tests
+Version: 0.1.0
+Authors@R: person("Jacob", "Goldstein-Greenwood", email = "jacobgg@virginia.edu",
+                  role = c("aut", "cre"))
+Description: permutation_cor() and permutation_t()
+License: Mozilla Public License 2.0
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.1.1
+Imports:
+    ggplot2,
+    lawstat
