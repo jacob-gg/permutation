@@ -15,7 +15,7 @@ permutation_mdiff(
 \arguments{
 \item{groups}{The vector/data frame column containing the (two) group identifiers}
 
-\item{values}{The vector/data frame column containing the values to be compared}
+\item{values}{The vector/data frame column containing the values to be compared (numeric or numeric-coercible)}
 
 \item{iterations}{Number of permutations (default = 10000)}
 
@@ -30,7 +30,7 @@ Runs a non-parametric permutation test of the mean difference between two groups
 \details{
 \code{permutation_mdiff} will:
 \itemize{
-  \item Run a permutation test for the mean difference between two groups and report a (two-sided) p-value
+  \item Run a permutation test for the mean difference between two groups and report a two-sided p-value
   \item Report a symmetry test for the null distribution generated from permuted data (\code{symmetry.test} called from \code{lawstat})
   \item Produce a histogram of the generated null distribution and overlay the observed mean difference on it (using \code{ggplot2})
 }
@@ -38,9 +38,8 @@ Requires: \code{ggplot2} and \code{lawstat}
 }
 \examples{
 set.seed(1969)
-groups <- c(rep('group_a', 500), rep('group_b', 500))
-values <- c(rnorm(500, 0, 1), rnorm(500, 0.2, 1))
-dat <- data.frame(groups, values)
-permutation_mdiff(dat$groups, dat$values)
+groups <- c(rep('a', 500), rep('b', 500))
+values <- c(rnorm(500, 0, 1), rnorm(494, 0.2, 1), rep(NA, 6))
+permutation_mdiff(groups, values)
 
 }

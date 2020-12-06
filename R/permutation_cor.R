@@ -29,6 +29,7 @@ permutation_cor <- function(x, y, iterations = 10^4, method = 'pearson', seed = 
   if ('lawstat' %in% installed.packages() == FALSE) {
     stop('Error: lawstat not installed; use install.packages("lawstat")')
   }
+  
   if ('ggplot2' %in% installed.packages() == FALSE) {
     stop('Error: ggplot2 not installed; use install.packages("ggplot2")')
   }
@@ -47,7 +48,7 @@ permutation_cor <- function(x, y, iterations = 10^4, method = 'pearson', seed = 
     dat_complete <- na.omit(data.frame(x, y))
     x <- dat_complete$x
     y <- dat_complete$y
-    cat('Original data were not pairwise complete: Observed correlation and null distribution calculated from ', length(x), 'pairwise-complete observations', '\n')
+    cat('Data are not pairwise complete: Observed correlation and null distribution calculated from ', length(x), 'pairwise-complete observations', '\n')
   }
   
   observed_cor <- cor(x, y, method = method)
