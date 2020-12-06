@@ -4,7 +4,7 @@
 #'
 #' \code{permutation_cor} will:
 #' \itemize{
-#'   \item Run a permutation test for a correlation and report a (two-sided) p-value
+#'   \item Run a permutation test for a correlation (using pairwise-complete observations) and report a two-sided p-value
 #'   \item Report a symmetry test for the null distribution generated from permuted data (\code{symmetry.test} called from \code{lawstat})
 #'   \item Produce a histogram of the generated null distribution and overlay the observed correlation on it (using \code{ggplot2})
 #' }
@@ -20,19 +20,35 @@
 #' set.seed(1969)
 #' x <- rnorm(1000, 0, 1)
 #' y <- x + runif(1000, 0, 10)
+#' x[sample(length(x), 5, replace = F)] <- NA
 #' permutation_cor(x, y)
 #'
 #' @export
 permutation_cor <- function(x, y, iterations = 10^4, method = 'pearson', seed = 4){
-
-  if('lawstat' %in% installed.packages() == FALSE){
+  
+  if ('lawstat' %in% installed.packages() == FALSE) {
     stop('Error: lawstat not installed; use install.packages("lawstat")')
   }
-  if('ggplot2' %in% installed.packages() == FALSE){
+  if ('ggplot2' %in% installed.packages() == FALSE) {
     stop('Error: ggplot2 not installed; use install.packages("ggplot2")')
   }
   
+  if (length(x) != length(y)) {
+    stop('Error: x and y must be the same length')
+  }
+  
+  if (FALSE %in% unlist(lapply(list(x, y), is.numeric))) {
+    stop('Error: x and y must both be numeric')
+  }
+  
   set.seed(seed)
+  
+  if (TRUE %in% unlist(lapply(list(x, y), is.na))) {
+    dat_complete <- na.omit(data.frame(x, y))
+    x <- dat_complete$x
+    y <- dat_complete$y
+    cat('Original data were not pairwise complete: Observed correlation and null distribution calculated from ', length(x), 'pairwise-complete observations', '\n')
+  }
   
   observed_cor <- cor(x, y, method = method)
   null_cor_dist <- rep(NA, iterations)
@@ -68,5 +84,5 @@ permutation_cor <- function(x, y, iterations = 10^4, method = 'pearson', seed = 
                     y = 'Frequency') +
       ggplot2::theme(plot.subtitle = ggplot2::element_text(face = 'italic'))
   ))
-
+  
 }
