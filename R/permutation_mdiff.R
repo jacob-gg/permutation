@@ -71,7 +71,9 @@ permutation_mdiff <- function(groups, values, iterations = 10^4, seed = 4, downs
   # Permutation procedure begins
   null_mean_diff_dist <- rep(NA, iterations)
   
-  # Note: In the permutation procedure below, using group_one_greater == T|F to determine whether null mean differences are calculated as a - b or b - a in the null-distribution generation isn't strictly necessary, as the two-sided p-value is calculated as the proportion of cases where the permuted absolute difference exceeds the observed absolute difference. However, given that the observed difference is set up in this function to always be positive, if the two-sided p-value was calculated as min(p_less, p_greater)*2, it would change (very) slightly depending on whether the null distribution was calculated with a - b or b - a (because the tails aren't perfectly symmetric).
+  # Note: group_one_greater == T|F refers to whether the observed difference was calculated as a - b or b - a (this function calculates the observed difference such that it’s always positive)
+  # Using group_one_greater == T|F below to determine whether null mean differences are calculated as a - b or b - a isn't strictly necessary here because the two-sided p-value is calculated as the proportion of cases where the absolute permuted difference exceeds the absolute observed difference, and that value won’t change based on whether a - b or b - a is used
+  # However, given that the observed difference is calculated in this function such that it's always positive (i.e., on the right side of the distribution), if the two-sided p-value was calculated as min(p_less, p_greater)*2, as some permutation tests do, the two-sided p-value would change (very) slightly depending on whether the null distribution was calculated with a - b or b - a, because the tails aren't perfectly symmetric (and, accordingly, the value being multiplied by two would be slightly different in each case)
   
   # Permutation procedure without downsampling (default; i.e., creating permuted groups of size n_a and n_b)
   if (downsample == F) {
