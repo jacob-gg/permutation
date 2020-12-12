@@ -35,7 +35,7 @@ Requires: \code{ggplot2} and \code{lawstat}
 \examples{
 set.seed(1969)
 x <- rnorm(1000, 0, 1)
-y <- x + runif(1000, 0, 10)
+y <- x + rnorm(1000, 0, 30)
 x[sample(length(x), 5, replace = F)] <- NA
 permutation_cor(x, y)
 

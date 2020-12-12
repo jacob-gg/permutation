@@ -9,7 +9,7 @@ permutation_mdiff(
   values,
   iterations = 10^4,
   seed = 4,
-  one.sided = FALSE
+  downsample = FALSE
 )
 }
 \arguments{
@@ -20,6 +20,8 @@ permutation_mdiff(
 \item{iterations}{Number of permutations (default = 10000)}
 
 \item{seed}{Set for reproducibility (default = 4)}
+
+\item{downsample}{If groups A and B are unbalanced, you can set the \code{downsample} argument to TRUE to use downsampling each permutation to generate permuted groups of size min(n_A, n_B); otherwise, \code{permutation_mdiff} will generate permuted groups of size n_A and n_B during the permutation procedure (default = FALSE)}
 }
 \value{
 Results reported in the console; plot generated in the viewer
@@ -35,11 +37,14 @@ Runs a non-parametric permutation test of the mean difference between two groups
   \item Produce a histogram of the generated null distribution and overlay the observed mean difference on it (using \code{ggplot2})
 }
 Requires: \code{ggplot2} and \code{lawstat}
+
+Note: If groups A and B are unbalanced, \code{permutation_mdiff}'s default is to generate permuted groups of sizes n_A and n_B; you can, however, use a downsampling procedure to generate permuted groups of size min(n_A, n_B); see above.
 }
 \examples{
 set.seed(1969)
-groups <- c(rep('a', 500), rep('b', 500))
-values <- c(rnorm(500, 0, 1), rnorm(494, 0.2, 1), rep(NA, 6))
+groups <- c(rep('control', 500), rep('experimental', 495))
+values <- c(runif(500, 0, 5), runif(490, 0.25, 5), rep(NA, 5))
 permutation_mdiff(groups, values)
+permutation_mdiff(groups, values, downsample = T)
 
 }

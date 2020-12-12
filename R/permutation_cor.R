@@ -19,31 +19,29 @@
 #' @examples
 #' set.seed(1969)
 #' x <- rnorm(1000, 0, 1)
-#' y <- x + runif(1000, 0, 10)
+#' y <- x + rnorm(1000, 0, 30)
 #' x[sample(length(x), 5, replace = F)] <- NA
 #' permutation_cor(x, y)
 #'
 #' @export
 permutation_cor <- function(x, y, iterations = 10^4, method = 'pearson', seed = 4){
-  
+  # Checks
   if ('lawstat' %in% installed.packages() == FALSE) {
     stop('Error: lawstat not installed; use install.packages("lawstat")')
   }
-  
   if ('ggplot2' %in% installed.packages() == FALSE) {
     stop('Error: ggplot2 not installed; use install.packages("ggplot2")')
   }
-  
   if (length(x) != length(y)) {
     stop('Error: x and y must be the same length')
   }
-  
   if (FALSE %in% unlist(lapply(list(x, y), is.numeric))) {
     stop('Error: x and y must both be numeric')
   }
   
   set.seed(seed)
   
+  # Structure data, omit NAs
   if (TRUE %in% unlist(lapply(list(x, y), is.na))) {
     dat_complete <- na.omit(data.frame(x, y))
     x <- dat_complete$x
@@ -51,22 +49,23 @@ permutation_cor <- function(x, y, iterations = 10^4, method = 'pearson', seed = 
     cat('Data are not pairwise complete: Observed correlation and null distribution calculated from ', length(x), 'pairwise-complete observations', '\n')
   }
   
+  # Calculate observed correlation
   observed_cor <- cor(x, y, method = method)
+  
+  # Permutation procedure
   null_cor_dist <- rep(NA, iterations)
   for (i in 1:iterations) {
     index <- sample(length(x), replace = FALSE)
     permuted_x_vals <- x[index]
     null_cor_dist[i] <- cor(permuted_x_vals, y, method = method)
   }
+  
+  # Calculate p-value: Proportion of permutations where abs(permuted correlation) > abs(observed correlation)
   cat('The observed correlation is r =', observed_cor, '\n')
-  p_less <- (sum(null_cor_dist <= observed_cor) + 1) / (length(null_cor_dist) + 1)
-  p_greater <- (sum(null_cor_dist >= observed_cor) + 1) / (length(null_cor_dist) + 1)
-  if (p_less < p_greater) {
-    p_val <- p_less*2
-  } else {
-    p_val <- p_greater*2
-  }
+  p_val <- (sum(abs(null_cor_dist) >= abs(observed_cor)) + 1) / (length(null_cor_dist) + 1)
   cat('The two-sided p-value for the permutation test is', p_val, '\n')
+  
+  # Symmetry test
   invisible(symmetric <- lawstat::symmetry.test(null_cor_dist, boot = FALSE))
   if (symmetric$p.value > .05) {
     cat('The null distribution for the permutation test is symmetric, p =', round(symmetric$p.value, digits = 4), '\n')
@@ -75,6 +74,7 @@ permutation_cor <- function(x, y, iterations = 10^4, method = 'pearson', seed = 
     cat('Change the seed and run the test again')
   }
   
+  # Histogram of null distribution
   suppressMessages(print(
     ggplot2::ggplot(data.frame(null_cor_dist)) +
       ggplot2::geom_histogram(ggplot2::aes(null_cor_dist)) +
