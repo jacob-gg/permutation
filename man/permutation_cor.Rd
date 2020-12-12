@@ -18,7 +18,7 @@ permutation_cor(x, y, iterations = 10^4, method = "pearson", seed = 4)
 \item{seed}{Set for reproducibility (default = 4)}
 }
 \value{
-Results reported in the console; plot generated in the viewer
+Results reported in the console and a plot generated in the viewer. If \code{permutation_cor} is saved to an object, it will save, as a list, the observed correlation, two-sided p-value, number of permutations used, and correlation method.
 }
 \description{
 Runs a non-parametric permutation test of a correlation.
@@ -36,7 +36,7 @@ Requires: \code{ggplot2} and \code{lawstat}
 set.seed(1969)
 x <- rnorm(1000, 0, 1)
 y <- x + rnorm(1000, 0, 30)
-x[sample(length(x), 5, replace = F)] <- NA
+x[sample(length(x), 5, replace = FALSE)] <- NA
 permutation_cor(x, y)
 
 }

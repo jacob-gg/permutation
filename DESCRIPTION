@@ -3,7 +3,7 @@ Title: Permutation Tests
 Version: 0.1.0
 Authors@R: person("Jacob", "Goldstein-Greenwood", email = "jacobgg@virginia.edu",
                   role = c("aut", "cre"))
-Description: permutation_cor() and permutation_mdiff()
+Description: Contains permutation tests, permutation_cor() and permutation_mdiff().
 License: Mozilla Public License 2.0
 Encoding: UTF-8
 LazyData: true
