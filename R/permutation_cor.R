@@ -2,20 +2,20 @@
 #'
 #' Runs a non-parametric permutation test of a correlation.
 #'
-#' \code{permutation_cor} will:
+#' \code{permutation_cor()} will:
 #' \itemize{
-#'   \item Run a permutation test for a correlation (using pairwise-complete observations) and report a two-sided p-value
-#'   \item Report a symmetry test for the null distribution generated from permuted data (\code{symmetry.test} called from \code{lawstat})
-#'   \item Produce a histogram of the generated null distribution and overlay the observed correlation on it (using \code{ggplot2})
+#'   \item Run a permutation test for a correlation (using pairwise-complete observations) and report a two-sided p-value.
+#'   \item Report a symmetry test for the null distribution generated from permuted data (\code{symmetry.test()} called from \code{lawstat}).
+#'   \item Produce a histogram of the generated null distribution and overlay the observed correlation on it (using \code{ggplot2}).
 #' }
-#' Requires: \code{ggplot2} and \code{lawstat}
+#' Requires: \code{ggplot2} and \code{lawstat}.
 #'
-#' @param x One of the two vectors/data frame columns to be correlated
-#' @param y The second of the two vectors/data frame columns to be correlated
-#' @param iterations Number of permutations (default = 10000)
-#' @param method Correlation method (default = 'pearson')
-#' @param seed Set for reproducibility (default = 4)
-#' @return Results reported in the console and a plot generated in the viewer. If \code{permutation_cor} is saved to an object, it will save, as a list, the observed correlation, two-sided p-value, number of permutations used, and correlation method.
+#' @param x One of the two vectors/data frame columns to be correlated.
+#' @param y The second of the two vectors/data frame columns to be correlated.
+#' @param iterations Number of permutations (default = 10000).
+#' @param method Correlation method (default = 'pearson').
+#' @param seed Set for reproducibility (default = 4).
+#' @return Results reported in the console and a plot generated in the viewer. If \code{permutation_cor()} is saved to an object, it will save, as a list, the observed correlation, two-sided p-value, number of permutations used, and correlation method.
 #' @examples
 #' set.seed(1969)
 #' x <- rnorm(1000, 0, 1)

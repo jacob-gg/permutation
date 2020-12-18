@@ -2,20 +2,20 @@
 #'
 #' Runs a non-parametric permutation test of the mean difference between two groups.
 #'
-#' \code{permutation_mdiff} will:
+#' \code{permutation_mdiff()} will:
 #' \itemize{
-#'   \item Run a permutation test for the mean difference between two groups and report a two-sided p-value
-#'   \item Report a symmetry test for the null distribution generated from permuted data (\code{symmetry.test} called from \code{lawstat})
-#'   \item Produce a histogram of the generated null distribution and overlay the observed mean difference on it (using \code{ggplot2})
+#'   \item Run a permutation test for the mean difference between two groups and report a two-sided p-value.
+#'   \item Report a symmetry test for the null distribution generated from permuted data (\code{symmetry.test()} called from \code{lawstat}).
+#'   \item Produce a histogram of the generated null distribution and overlay the observed mean difference on it (using \code{ggplot2}).
 #' }
 #' Requires: \code{ggplot2} and \code{lawstat}
 #'
-#' @param groups The vector/data frame column containing the (two) group identifiers
-#' @param values The vector/data frame column containing the values to be compared (numeric or numeric-coercible)
-#' @param iterations Number of permutations (default = 10000)
-#' @param seed Set for reproducibility (default = 4)
-#' @param downsample Note: If the two groups, A and B, are unbalanced, \code{permutation_mdiff}'s default is to generate permuted groups of sizes n_A and n_B; you can, however, set \code{downsample = T} to use a downsampling procedure each permutation to generate permuted groups of size min(n_A, n_B)
-#' @return Results reported in the console and a plot generated in the viewer. If \code{permutation_mdiff} is saved to an object, it will save, as a list, the observed difference, two-sided p-value, and number of permutations used.
+#' @param groups The vector/data frame column containing the (two) group identifiers.
+#' @param values The vector/data frame column containing the values to be compared (numeric or numeric-coercible).
+#' @param iterations Number of permutations (default = 10000).
+#' @param seed Set for reproducibility (default = 4).
+#' @param downsample Note: If the two groups, A and B, are unbalanced, \code{permutation_mdiff()}'s default is to generate permuted groups of sizes n_A and n_B; you can, however, set \code{downsample = T} to use a downsampling procedure each permutation to generate permuted groups of size \code{min(n_A, n_B)}.
+#' @return Results reported in the console and a plot generated in the viewer. If \code{permutation_mdiff()} is saved to an object, it will save, as a list, the observed difference, two-sided p-value, and number of permutations used.
 #' @examples
 #' set.seed(1969)
 #' groups <- c(rep('control', 500), rep('experimental', 495))

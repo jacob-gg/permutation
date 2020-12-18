@@ -7,30 +7,30 @@
 permutation_cor(x, y, iterations = 10^4, method = "pearson", seed = 4)
 }
 \arguments{
-\item{x}{One of the two vectors/data frame columns to be correlated}
+\item{x}{One of the two vectors/data frame columns to be correlated.}
 
-\item{y}{The second of the two vectors/data frame columns to be correlated}
+\item{y}{The second of the two vectors/data frame columns to be correlated.}
 
-\item{iterations}{Number of permutations (default = 10000)}
+\item{iterations}{Number of permutations (default = 10000).}
 
-\item{method}{Correlation method (default = 'pearson')}
+\item{method}{Correlation method (default = 'pearson').}
 
-\item{seed}{Set for reproducibility (default = 4)}
+\item{seed}{Set for reproducibility (default = 4).}
 }
 \value{
-Results reported in the console and a plot generated in the viewer. If \code{permutation_cor} is saved to an object, it will save, as a list, the observed correlation, two-sided p-value, number of permutations used, and correlation method.
+Results reported in the console and a plot generated in the viewer. If \code{permutation_cor()} is saved to an object, it will save, as a list, the observed correlation, two-sided p-value, number of permutations used, and correlation method.
 }
 \description{
 Runs a non-parametric permutation test of a correlation.
 }
 \details{
-\code{permutation_cor} will:
+\code{permutation_cor()} will:
 \itemize{
-  \item Run a permutation test for a correlation (using pairwise-complete observations) and report a two-sided p-value
-  \item Report a symmetry test for the null distribution generated from permuted data (\code{symmetry.test} called from \code{lawstat})
-  \item Produce a histogram of the generated null distribution and overlay the observed correlation on it (using \code{ggplot2})
+  \item Run a permutation test for a correlation (using pairwise-complete observations) and report a two-sided p-value.
+  \item Report a symmetry test for the null distribution generated from permuted data (\code{symmetry.test()} called from \code{lawstat}).
+  \item Produce a histogram of the generated null distribution and overlay the observed correlation on it (using \code{ggplot2}).
 }
-Requires: \code{ggplot2} and \code{lawstat}
+Requires: \code{ggplot2} and \code{lawstat}.
 }
 \examples{
 set.seed(1969)

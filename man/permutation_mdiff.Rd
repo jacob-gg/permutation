@@ -13,28 +13,28 @@ permutation_mdiff(
 )
 }
 \arguments{
-\item{groups}{The vector/data frame column containing the (two) group identifiers}
+\item{groups}{The vector/data frame column containing the (two) group identifiers.}
 
-\item{values}{The vector/data frame column containing the values to be compared (numeric or numeric-coercible)}
+\item{values}{The vector/data frame column containing the values to be compared (numeric or numeric-coercible).}
 
-\item{iterations}{Number of permutations (default = 10000)}
+\item{iterations}{Number of permutations (default = 10000).}
 
-\item{seed}{Set for reproducibility (default = 4)}
+\item{seed}{Set for reproducibility (default = 4).}
 
-\item{downsample}{Note: If the two groups, A and B, are unbalanced, \code{permutation_mdiff}'s default is to generate permuted groups of sizes n_A and n_B; you can, however, set \code{downsample = T} to use a downsampling procedure each permutation to generate permuted groups of size min(n_A, n_B)}
+\item{downsample}{Note: If the two groups, A and B, are unbalanced, \code{permutation_mdiff()}'s default is to generate permuted groups of sizes n_A and n_B; you can, however, set \code{downsample = T} to use a downsampling procedure each permutation to generate permuted groups of size \code{min(n_A, n_B)}.}
 }
 \value{
-Results reported in the console and a plot generated in the viewer. If \code{permutation_mdiff} is saved to an object, it will save, as a list, the observed difference, two-sided p-value, and number of permutations used.
+Results reported in the console and a plot generated in the viewer. If \code{permutation_mdiff()} is saved to an object, it will save, as a list, the observed difference, two-sided p-value, and number of permutations used.
 }
 \description{
 Runs a non-parametric permutation test of the mean difference between two groups.
 }
 \details{
-\code{permutation_mdiff} will:
+\code{permutation_mdiff()} will:
 \itemize{
-  \item Run a permutation test for the mean difference between two groups and report a two-sided p-value
-  \item Report a symmetry test for the null distribution generated from permuted data (\code{symmetry.test} called from \code{lawstat})
-  \item Produce a histogram of the generated null distribution and overlay the observed mean difference on it (using \code{ggplot2})
+  \item Run a permutation test for the mean difference between two groups and report a two-sided p-value.
+  \item Report a symmetry test for the null distribution generated from permuted data (\code{symmetry.test()} called from \code{lawstat}).
+  \item Produce a histogram of the generated null distribution and overlay the observed mean difference on it (using \code{ggplot2}).
 }
 Requires: \code{ggplot2} and \code{lawstat}
 }
