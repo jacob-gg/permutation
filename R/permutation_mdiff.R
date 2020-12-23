@@ -42,9 +42,9 @@ permutation_mdiff <- function(groups, values, iterations = 10^4, seed = 4, downs
   set.seed(seed)
   
   # Structure data, omit NAs
-  test_data <- data.frame(groups, values)
-  test_data$groups <- as.factor(as.character(test_data$groups))
-  test_data$values <- as.numeric(as.character(test_data$values))
+  test_data <- data.frame(groups = as.factor(as.character(groups)),
+                          values = as.numeric(as.character(values))
+  )
   if (TRUE %in% is.na(test_data)) {
     test_data <- stats::na.omit(test_data)
     if (downsample == F) {
