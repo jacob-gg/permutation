@@ -149,5 +149,4 @@ permutation_mdiff <- function(groups, values, iterations = 10^4, seed = 4, downs
          two_sided_p_value = p_val,
          permutations = iterations)
   )
-  
 }

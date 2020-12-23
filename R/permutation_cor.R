@@ -95,5 +95,4 @@ permutation_cor <- function(x, y, iterations = 10^4, method = 'pearson', seed = 
          permutations = iterations,
          correlation_method = method)
   )
-  
 }
