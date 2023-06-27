@@ -36,7 +36,6 @@ Runs a non-parametric permutation test of the mean difference between two groups
   \item Report a symmetry test for the null distribution generated from permuted data (\code{symmetry.test()} called from \code{lawstat}).
   \item Produce a histogram of the generated null distribution and overlay the observed mean difference on it (using \code{ggplot2}).
 }
-Requires: \code{ggplot2} and \code{lawstat}
 }
 \examples{
 set.seed(1969)
